@@ -80,8 +80,12 @@ public class MainActivity extends AppCompatActivity {
         if(ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_CODE );
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,locListener);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,locListener);
+
+        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        cityName = getCityName(location.getLongitude(), location.getLatitude());
+        getWeatherInfo(cityName);
+        //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,locListener);
+        //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,locListener);
 
 
 
@@ -99,15 +103,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    public LocationListener locListener = new LocationListener() {
-        @Override
-        public void onLocationChanged(@NonNull Location location) {
-
-            cityName = getCityName(location.getLongitude(), location.getLatitude());
-            getWeatherInfo(cityName);
-        }
-    };
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -143,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         return cityName;
     }
     private void getWeatherInfo(String cityName){
-        String url = "http://api.weatherapi.com/v1/forecast.json?key=6c2d89ad986241e78da230341222204 &q=Cali&days=1&aqi=yes&alerts=yes";
+        String url = "http://api.weatherapi.com/v1/forecast.json?key=6c2d89ad986241e78da230341222204 &q="+cityName+"&days=1&aqi=yes&alerts=yes";
         cityNameTV.setText(cityName);
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
