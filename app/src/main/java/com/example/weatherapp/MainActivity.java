@@ -157,10 +157,22 @@ public class MainActivity extends AppCompatActivity {
                     conditionTV.setText(condition);
                     if (isDay == 1){
                         //morning
-                        Picasso.get().load("https://images.unsplash.com/photo-1582510877465-8e2e899a94b6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80").into(backIV);
+                        //https://images.unsplash.com/photo-1525776759712-7b066ce45de0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80
+                        if (condition.equals("Sunny")){
+                            Picasso.get().load("https://images.unsplash.com/photo-1551189671-d689632527c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80").into(backIV);
+                        }
                     }else {
-
-                        Picasso.get().load("https://images.unsplash.com/photo-1435224654926-ecc9f7fa028c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80").into(backIV);
+                        if (condition.equals("Overcast")){
+                            Picasso.get().load("https://images.unsplash.com/photo-1630086630782-e415fee5eb7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80").into(backIV);
+                        }else if (condition.equals("Clear")){
+                            Picasso.get().load("https://images.unsplash.com/photo-1513628253939-010e64ac66cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80").into(backIV);
+                        }else if (condition.equals("Rain")){
+                            Picasso.get().load("https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80").into(backIV);
+                        }else if (condition.equals("Partly cloudy")){
+                            Picasso.get().load("https://images.unsplash.com/photo-1523687996313-ce446f7a658f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80").into(backIV);
+                        }else if (condition.equals("Patchy rain possible")){
+                            Picasso.get().load("https://images.unsplash.com/photo-1510936723039-063b76afd29e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80").into(backIV);
+                        }
                     }
                     JSONObject forecastObj = response.getJSONObject("forecast");
                     JSONObject forcast0 = forecastObj.getJSONArray("forecastday").getJSONObject(0);
